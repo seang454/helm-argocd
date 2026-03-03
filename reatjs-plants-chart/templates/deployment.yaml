@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: react-deployment        # unique name
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: react-app            # matches app-service selector
