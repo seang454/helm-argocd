@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-deployment        # unique name
+spec:
+  selector:
+    matchLabels:
+      app: react-app            # matches app-service selector
+  template:
+    metadata:
+      labels:
+        app: react-app          # ✅ matches
+    spec:
+      containers:
+      - name: myapp-container
+        image: 69966/earthdx:78
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment        # unique name
+spec:
+  selector:
+    matchLabels:
+      app: nginx-app            # matches nginx-service selector
+  template:
+    metadata:
+      labels:
+        app: nginx-app          # ✅ matches
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
